@@ -22,8 +22,8 @@ model List {
 model Task {
   id     Int     @id @default(autoincrement())
   title  String
-  status String
-  order String
+  status String @default("TODO")
+  order String @default("999")
   listId Int
   list   List    @relation(fields: [listId], references: [id])
   createdAt DateTime @default(now())

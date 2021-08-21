@@ -1,14 +1,16 @@
-//TODO: Setup Project
+//TODO: Setup Project ✅
 
-//TODO: Setup Route
+//TODO: Setup Route ✅
 
-//TODO: Setup Database
+//TODO: Setup Database ✅
 
-//TODO: Setup Controller
+//TODO: Setup Controller 
 
 //TODO: Setup Test
 
 //TODO: Business Logic
+
+//TODO: Refractor Code
 
 
 /* 
@@ -23,11 +25,14 @@ TASK :
 
 //Setup Apollo Server
 import { ApolloServer, gql } from "apollo-server";
+// import database from "./adapter/mock-database";
+import database from "./adapter/database";
 const typeDefs = gql`
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
   # This "Book" type defines the queryable fields for every book in our data source.
   type List {
+    id: Int
     title: String
     tasks: [Task]
   }
@@ -44,39 +49,27 @@ const typeDefs = gql`
     lists: [List]
   }
 
-  input Input {
-    title: String
-  }
-
   type Mutation {
-    createList(ListInput: Input): List
-    createTask(TaskInput: Input): Task
-    updateTask(taskId: ID!, tittle: String): Task
-    moveTask(taskId: ID!, order: String): Task
+    createList(title: String): List
+    createTask(title: String, listId:Int): Task
+    updateTask(id: Int, title: String): Task
+    moveTask(id: Int, order: String): Task
   }
 
 `;
-
-
-const tasks = [
-  {
-    title: 'The Awakening',
-    status: 'TODO',
-    order: "1"
-  },
-  {
-    title: 'City of Glass',
-    status: 'DONE',
-    order: "2"
-  },
-];
 
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    tasks: () => tasks,
+    lists: async () => await database.getList(),
   },
+  Mutation:{
+    createList: async (_: void,{title}: any) => await database.createList(title),
+    createTask: async (_: void,{title,listId}: any) => await database.createTask(title,listId),
+    updateTask: async (_: void,{id,title}: any) => await database.updateTask(id,title),
+    moveTask: async (_: void,{id,order}: any) => await database.moveTask(id,order),
+  }
 };
 
 // The ApolloServer constructor requires two parameters: your schema

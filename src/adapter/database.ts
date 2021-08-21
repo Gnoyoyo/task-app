@@ -6,7 +6,7 @@ class Databases {
   static async createList(title:string): Promise<number> {
     const list = await prisma.list.create({
       data: {
-        title: title,
+        title: title
       }
     });
     return list.id;
@@ -34,14 +34,21 @@ class Databases {
     });
   }
 
-  static async createTask(title:string,listId:number): Promise<void> {
-    await prisma.task.create({
-      data: {
-        title: title,
+  static async createTask(title:string,listId:number): Promise<any> {
+    const count = await prisma.task.count({
+      where: {
         listId: listId
       }
+    }
+    );
+    const task = await prisma.task.create({
+      data: {
+        title: title,
+        listId: listId,
+        order : String(count * 10)
+      }
     });
-    return;
+    return task;
   }
 
   static async updateTask(id:number,title:string): Promise<void> {

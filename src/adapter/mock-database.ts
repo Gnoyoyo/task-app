@@ -3,7 +3,7 @@ class Databases {
     console.log("Create LIST");
     console.log(title);
     return {
-      title : title,
+      title : title
     };
   }
 
@@ -21,14 +21,14 @@ class Databases {
           title: 'City of Glass',
           status: 'DONE',
           order: "2"
-        },
+        }
       ]
     }]
   }
 
-  static async createTask(title:string,listId:number): Promise<void> {
+  static async createTask(title:string,listId:number): Promise<any> {
     console.log("Create" ,title,listId);
-    return;
+    return 1;
   }
 
   static async moveTask(id:number,order:string): Promise<void> {

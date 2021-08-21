@@ -1,0 +1,31 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "GraphQL Task Management Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gnoyoyo/task-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gnoyoyo/task-manager/issues"
+  },
+  "homepage": "https://github.com/Gnoyoyo/task-manager#readme",
+  "devDependencies": {
+    "@types/node": "^16.6.2",
+    "prisma": "^2.16.0-dev.68",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.16.0-dev.68",
+    "apollo-server": "^3.1.2",
+    "graphql": "^15.5.1"
+  }
+}

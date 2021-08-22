@@ -9,9 +9,9 @@ const typeDefs = gql`
   }
 
   type Task {
+    id: Int
     title: String
     status: String
-    order: String
   }
   type Query {
     lists: [List]
@@ -20,8 +20,7 @@ const typeDefs = gql`
   type Mutation {
     createList(title: String): List
     createTask(title: String, listId:Int): Task
-    updateTask(id: Int, title: String): Task
-    moveTask(id: Int, order: String): Task
+    updateTask(id: Int, title: String,status:String,order:Int): Task
   }
 `;
 

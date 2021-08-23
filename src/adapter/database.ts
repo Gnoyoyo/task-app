@@ -2,7 +2,7 @@ import { List, PrismaClient, Task } from "@prisma/client";
 import * as Interface from  "./database-interface";
 const prisma = new PrismaClient();
 
-class Databases {
+export default class Databases{
   static async createList(request : Interface.createListRequest): Promise<Interface.createListResponse> {
     const list = await prisma.list.create({
       data: {
@@ -37,17 +37,11 @@ class Databases {
   }
 
   static async createTask(request: Interface.createTaskRequest): Promise<Interface.createTaskResponse> {
-    const count = await prisma.task.count({
-      where: {
-        listId: request.listId
-      }
-    }
-    );
     const task = await prisma.task.create({
       data: {
         title: request.title,
         listId: request.listId,
-        order : String(count * 100)
+        order : request.order
       }
     });
     return task;
@@ -66,47 +60,21 @@ class Databases {
       }
     });
   }
-
-  static async getTaskOrderbyOrder(
-    request : {
-      listId: number,
-      order: number
-    }): Promise<Task[]> {
-    const TAKE = 2;
-    const tasks = await prisma.task.findMany({
-      skip: request.order - 2,
-      take: TAKE,
-      where : {
-        listId: request.listId
-      },
-      orderBy: {
-        order: 'asc',
-      }
-    });
-    console.log(tasks);
-    return tasks;
-  }
-
-  static async getTaskCount(
-    request : {
-      listId: number
-    }): Promise<number> {
-    const count = await prisma.task.count({
-      where : {
-        listId: request.listId
-      }});
-    return count;
-  }
-
+  
   static async getTask(
-    request : {
-      id: number
-    }): Promise<Task | null> {
+    request : Interface.getTaskRequest): Promise<Interface.getTaskResponse | undefined> {
     const task = await prisma.task.findUnique({
       where : {
         id: request.id
       }});
-    return task;
+    return task ? 
+      {
+        id: task.id,
+        title: task.title,
+        order: Number(task.order),
+        status: task.status,
+        listId: task.listId
+      }:undefined;
   }
 
   static async getLastTask(
@@ -121,10 +89,7 @@ class Databases {
         order: 'desc',
       }});
     return task;
-  }
-
-  //get string between two strings
-  
+  }  
 
   static async getFirstTask(
     request : {
@@ -140,6 +105,3 @@ class Databases {
     return task;
   }
 }   
-
-
-export default Databases;

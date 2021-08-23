@@ -23,7 +23,7 @@ model Task {
   id     Int     @id @default(autoincrement())
   title  String
   status String @default("TODO")
-  order String @default("999")
+  order Decimal
   listId Int
   list   List    @relation(fields: [listId], references: [id])
   createdAt DateTime @default(now())

@@ -6,4 +6,6 @@ module.exports = {
     "src/**/*.{js,jsx,ts,tsx}",
     "!<rootDir>/node_modules/"
   ],
+  clearMocks: true,
+  setupFilesAfterEnv: ['<rootDir>/singleton.ts'],
 };

@@ -1,9 +1,9 @@
-import * as Interface from  "./database-interface";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as Interface from  "../database-interface";
 import { List, Task } from "@prisma/client";
+import { Prisma } from '@prisma/client'
 class Databases {
   static async createList(request : Interface.createListRequest): Promise<Interface.createListResponse> {
-    console.log("Create LIST");
-    console.log(request.title);
     return {
       id: 1,
       title :request.title
@@ -13,7 +13,6 @@ class Databases {
   static async getList(): Promise<(List & {
     tasks: Task[];
   })[]> {
-    console.log("GET LIST");
     return [{
       id:1,
       title: "School TODO",
@@ -25,7 +24,7 @@ class Databases {
           listId: 1,
           title: 'Home Work',
           status: 'TODO',
-          order: "1",
+          order: new Prisma.Decimal(1),
           createdAt: new Date("2021-08-21T17:31:30.967Z"),
           updatedAt: new Date("2021-08-21T17:31:30.967Z"),
         },
@@ -34,7 +33,7 @@ class Databases {
           listId: 1,
           title: 'Class Work',
           status: 'DONE',
-          order: "2",
+          order: new Prisma.Decimal(2),
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -43,7 +42,6 @@ class Databases {
   }
 
   static async createTask(request: Interface.createTaskRequest): Promise<Interface.createTaskResponse> {
-    console.log("Create" ,request);
     return {
       id :1,
       title: "string",
@@ -52,11 +50,37 @@ class Databases {
   }
 
   static async updateTask(request:Interface.updateTaskRequest): Promise<Interface.updateTaskResponse> {
-    console.log("Update" ,request)
     return {
       id :1,
       title :"string",
       status :"TODO"
+    };
+  }
+  static async getTask(request:Interface.getTaskRequest): Promise<Interface.getTaskResponse> {
+    return {
+      id :1,
+      title :"string",
+      status :"TODO",
+      order : 1,
+      listId: 1,
+    };
+  }
+  static async getLastTask(request:Interface.getTaskRequest): Promise<Interface.getTaskResponse> {
+    return {
+      id :1,
+      title :"string",
+      status :"TODO",
+      order : 1,
+      listId: 1,
+    };
+  }
+  static async getFirstTask(request:Interface.getTaskRequest): Promise<Interface.getTaskResponse> {
+    return {
+      id :1,
+      title :"string",
+      status :"TODO",
+      order : 1,
+      listId: 1,
     };
   }
 

@@ -20,6 +20,7 @@ export interface getListResponse {
 export interface createTaskRequest {
   listId :number
   title :string
+  order : number
 }
   
 export interface createTaskResponse {
@@ -31,7 +32,7 @@ export interface createTaskResponse {
 export interface updateTaskRequest {
   id :number
   title?: string
-  order? :string
+  order? :number
   status? :string
 }
     
@@ -39,6 +40,40 @@ export interface updateTaskResponse {
   id :number
   title :string
   status: string
+}
+
+export interface getTaskRequest {
+  id :number
+}
+    
+export interface getTaskResponse {
+  id :number
+  title :string
+  status: string
+  order: number
+  listId: number
+}
+
+export interface getLastTaskRequest {
+  listId :number
+}
+    
+export interface getLastTaskResponse {
+  id :number
+  title :string
+  status: string
+  order: number
+}
+
+export interface getFirstRequest {
+  listId :number
+}
+    
+export interface getFirstResponse {
+  id :number
+  title :string
+  status: string
+  order: number
 }
 
 

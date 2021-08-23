@@ -1,7 +1,7 @@
 import ListController from "../../src/controller/list"
 import Database from "../../src/adapter/database"
-import MockDatabase from "../../src/adapter/mock-database"
-describe("Task Manager Validity", () => {
+import MockDatabase from "../../src/adapter/__mocks__/database"
+describe("List Controller Tests Suite", () => {
   it('Should Get List', async () => {
     Database.getList = jest.fn(
       MockDatabase.getList

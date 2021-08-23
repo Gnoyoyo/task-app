@@ -21,6 +21,7 @@ const typeDefs = gql`
     createList(title: String): List
     createTask(title: String, listId:Int): Task
     updateTask(id: Int, title: String,status:String,order:Int): Task
+    moveTask(id: Int, beforeId: Int ,afterId:Int): Task
   }
 `;
 

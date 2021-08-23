@@ -13,7 +13,7 @@ const resolvers = {
           title: title,
         });
       }else{
-        throw "ERROR"
+        throw "ERROR : Required Field Not Found"
       }
     },
     createTask: async (_: void,{title,listId}: Type.MutationCreateTaskArgs) : Promise<Type.Mutation> => {
@@ -21,21 +21,31 @@ const resolvers = {
         const task = await TaskController.createTask(title,listId)
         return task;
       }else{
-        throw "ERROR"
+        throw "ERROR : Required Field Not Found"
       }
     },
-    updateTask: async (_: void,{id,title,status,order}: Type.MutationUpdateTaskArgs) : Promise<Type.Mutation> => {
-
+    updateTask: async (_: void,{id,title,status}: Type.MutationUpdateTaskArgs) : Promise<Type.Mutation> => {
       if(id){
         const task = await TaskController.updateTask({
           id:id,
           title:title,
-          status:status,
-          order:order
+          status:status
         })
         return task;
       }else{
-        throw "ERROR"
+        throw "ERROR : Required Field Not Found"
+      }
+    },
+    moveTask: async (_: void,{id,beforeId,afterId}: any) : Promise<Type.Mutation> => {
+      if(id){
+        const task = await TaskController.moveTask({
+          id:id,
+          beforeId:beforeId,
+          afterId:afterId,
+        })
+        return task;
+      }else{
+        throw "ERROR : Required Field Not Found"
       }
     }
   }

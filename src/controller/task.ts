@@ -56,7 +56,7 @@ class TaskController {
       throw new Error("Task doesn't exist")
     }
 
-    const order = await TaskUtils.calculateOrder({
+    const order = await TaskUtils.calculateNewTaskPosition({
       listId:task.listId,
       beforeId:request.beforeId,
       afterId:request.afterId

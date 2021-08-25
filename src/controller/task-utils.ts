@@ -2,7 +2,7 @@
 import Database from "../adapter/database";
 
 export default class TaskUtils {
-  static async calculateOrder(request:
+  static async calculateNewTaskPosition(request:
   {
     listId:number,
     beforeId?:number,

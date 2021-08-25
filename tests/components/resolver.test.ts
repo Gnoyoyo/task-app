@@ -6,7 +6,7 @@ import ListController from "../../src/controller/list";
 
 describe("Resolver Tests Suites", () => {
 
-  it('Should get List', async () => {
+  it('Should get List success', async () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers
@@ -39,7 +39,7 @@ describe("Resolver Tests Suites", () => {
       }] }]});
   });
 
-  it('Should create List', async () => {
+  it('Should create List success', async () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers
@@ -60,7 +60,7 @@ describe("Resolver Tests Suites", () => {
     ));
   
     const res = await server.executeOperation({ query: CREATE_LIST, variables: {} });
-    expect(res).toBeDefined();
+    expect(res.data).toEqual({createList :{title:'List1',id:57}});
   });
 
   it('Should throw error when create List without tittle', async () => {
@@ -82,15 +82,14 @@ describe("Resolver Tests Suites", () => {
         id: 57, title: 'List1'
       }
     ));
-    try {
-      await server.executeOperation({ query: CREATE_LIST, variables: {} });
-    } catch (error) {
-      expect(error).toEqual("ss");      
-    }
+    const res = await server.executeOperation({ query: CREATE_LIST, variables: {} });
+    expect(res.errors).toBeDefined();
+      
+
 
   });
 
-  it('Should create Task', async () => {
+  it('Should create Task success', async () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers
@@ -110,17 +109,17 @@ mutation createTask {
     ));
   
     const res = await server.executeOperation({ query: CREATE_TASK, variables: {} });
-    expect(res).toBeDefined();
+    expect(res.data).toEqual({createTask :{title:'List1'}});
   });
 
-  it('Should update Task', async () => {
+  it('Should update Task success', async () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers
     });
     const UPDATE_TASK = gql`
       mutation updateTask {
-        updateTask(id:20,order:5){
+        updateTask(id:20,status:"DOING"){
           title
           status
         }
@@ -129,15 +128,15 @@ mutation createTask {
 
     TaskController.updateTask = jest.fn(() => Promise.resolve(
       {
-        id: 57, title: 'List1'
+        id: 57, title: 'List1', status: 'DOING'
       }
     ));
   
     const res = await server.executeOperation({ query: UPDATE_TASK, variables: {} });
-    expect(res).toBeDefined();
+    expect(res.data).toEqual({updateTask :{title:'List1',status:"DOING"}});
   });
 
-  it('Should move Task', async () => {
+  it('Should move Task success', async () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers
@@ -157,6 +156,6 @@ mutation createTask {
     ));
   
     const res = await server.executeOperation({ query: MOVE_TASK, variables: {} });
-    expect(res).toBeDefined();
+    expect(res.data).toEqual({moveTask :{title:'List1'}});
   });
 });

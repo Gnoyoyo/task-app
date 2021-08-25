@@ -36,7 +36,7 @@ const resolvers = {
         throw "ERROR : Required Field Not Found"
       }
     },
-    moveTask: async (_: void,{id,beforeId,afterId}: any) : Promise<Type.Mutation> => {
+    moveTask: async (_: void,{id,beforeId,afterId}: Type.MutationMoveTaskArgs) : Promise<Type.Mutation> => {
       if(id){
         const task = await TaskController.moveTask({
           id:id,

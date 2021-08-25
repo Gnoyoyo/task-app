@@ -23,6 +23,7 @@ export type Mutation = {
   createList?: Maybe<List>;
   createTask?: Maybe<Task>;
   updateTask?: Maybe<Task>;
+  moveTask?: Maybe<Task>;
 };
 
 
@@ -42,6 +43,13 @@ export type MutationUpdateTaskArgs = {
   title?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   order?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationMoveTaskArgs = {
+  id?: Maybe<Scalars['Int']>;
+  beforeId?: Maybe<Scalars['Int']>;
+  afterId?: Maybe<Scalars['Int']>;
 };
 
 export type Query = {

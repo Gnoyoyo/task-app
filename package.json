@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
-    "start": "nodemon --watch './**/*.ts' --exec 'ts-node' ./src/app.ts",
+    "start": "npx ts-node ./src/app.ts",
+    "nodemon": "nodemon --watch './**/*.ts' --exec 'ts-node' ./src/app.ts",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'",
     "generate": "graphql-codegen"
@@ -36,7 +37,6 @@
     "nodemon": "^2.0.12",
     "prisma": "^2.30.0",
     "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   },
   "dependencies": {

@@ -7,6 +7,7 @@ describe("Task Controller Test Suites", () => {
       MockDatabase.createTask
     );
     const task = await TaskController.createTask("name",1);
+    expect(Database.createTask).toBeCalled()
     expect(task).toEqual({ id: 1, title: 'string', status: 'TODO' });
   });
 
@@ -22,7 +23,8 @@ describe("Task Controller Test Suites", () => {
       title: "name",
       status: "DONE",
     });
-
+    expect(Database.getTask).toBeCalled()
+    expect(Database.updateTask).toBeCalled()
     expect(task).toEqual({ id: 1, title: 'string', status: 'TODO' });
   });
 
@@ -38,6 +40,8 @@ describe("Task Controller Test Suites", () => {
       beforeId: 1,
       afterId: 1,
     });
+    expect(Database.getTask).toBeCalledTimes(3)
+    expect(Database.updateTask).toBeCalled()
     expect(task).toEqual({ id: 1, title: 'string', status: 'TODO' });
   });
 

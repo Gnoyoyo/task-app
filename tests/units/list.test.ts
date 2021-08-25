@@ -7,6 +7,7 @@ describe("List Controller Tests Suite", () => {
       MockDatabase.getList
     );
     const task = await ListController.getList();
+    expect(Database.getList).toBeCalled()
     expect(task).toEqual([{"id": 1, "tasks": [{"id": 1, "status": "TODO", "title": "Home Work"}, {"id": 2, "status": "DONE", "title": "Class Work"}], "title": "School TODO"}]);
   });
   it('Should Create List success', async () => {
@@ -16,6 +17,7 @@ describe("List Controller Tests Suite", () => {
     const task = await ListController.createList({
       title: "name"
     });
+    expect(Database.createList).toBeCalled()
     expect(task).toEqual({id:1,title: 'name'});
   });
 });

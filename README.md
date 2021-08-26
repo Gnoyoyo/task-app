@@ -58,3 +58,64 @@ To run test of the application, run the following command
 ```bash
 npm test
 ```
+
+## Example
+
+Get List
+```
+
+query GetList {
+  lists {
+    id
+    title
+    tasks {
+      id
+      title
+      status
+    }
+    }
+  }
+}
+```
+
+Create List
+
+```
+mutation CreateList {
+  createList(title:"name2"){
+    title
+    id
+  }
+}
+```
+
+Create Task
+
+```
+mutation createTask {
+  createTask(title:"name3",listId:1){
+    title
+  }
+}
+```
+
+Update Task
+
+```
+mutation updateTask {
+  updateTask(id:1,status:"DONE"){
+    title
+    status
+  }
+}
+```
+
+Move Task
+
+```
+mutation moveTask {
+  moveTask(id:1,beforeId:3,afterId:4){
+    title
+  }
+}
+```

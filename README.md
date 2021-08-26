@@ -2,7 +2,7 @@
 
 GraphQL Task Management Application
 
-This is a simple task Management Service using GraphQL and SQLight
+This is a simple task Management Service using GraphQL and SQLite
 
 Feature :  
     Create a new List ✅  

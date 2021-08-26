@@ -10,7 +10,8 @@
     "nodemon": "nodemon --watch './**/*.ts' --exec 'ts-node' ./src/app.ts",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "db-init" : "npx prisma db push"
   },
   "repository": {
     "type": "git",

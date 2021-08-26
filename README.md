@@ -40,7 +40,7 @@ DATABASE_URL="file:../db/database.db"
 3. Lastly run the following command to prepare databases
 
 ```bash
-npx prisma db push
+npm run db-init
 ```
 
 ## Start Application
